@@ -9,8 +9,6 @@ const initState = {
 };
 
 export default function reducer(state = initState, action = {}) {
-    console.log('test.js');
-    console.log(action);
     switch(action.type){
         
         case LOAD_DATA:
@@ -18,7 +16,7 @@ export default function reducer(state = initState, action = {}) {
                 ...state, loading: true, error: null, loaded: false 
             };
         case LOAD_SUCCESS:
-        console.log('tak')
+
             return {
                 ...state, loading: false, test: action.result, loaded: true 
             };
@@ -27,8 +25,6 @@ export default function reducer(state = initState, action = {}) {
                 ...state, loading: false, error: action.error.message
             };
         default:
-        console.log('nie')
-        console.log(action.type);
             return state;
     }
 }
@@ -46,3 +42,4 @@ export function saveTest(data) {
         result: data.data+1
     };
 }
+

@@ -5,16 +5,21 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {button} from 'react-bootstrap';
 import Nav from "../components/layout/Nav";
+import Counter from '../components/Counter';
+import {incrementCounter , decrementCounter} from '../redux/reducers/counter';
 
 const mapStateToProps = (state) => {
   return {
-      test: state.test
+      test: state.test,
+      counter: state.counter
   };
 } ;
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-      saveTest
+      saveTest,
+      incrementCounter,
+      decrementCounter
   },dispatch);
 };
 const a = {data: 1};
@@ -23,14 +28,26 @@ class App extends React.Component {
 
 
 componentWillMount() {
-  console.log('dziala')
     this.props.saveTest(a); 
 }
+
+increment() {
+  this.props.incrementCounter();
+}
+
+decrement() {
+  this.props.decrementCounter();
+}
+
 
   render() {
     return (
      <div>
          <Nav />
+         <Counter 
+         value={this.props.counter}
+         onIncerment = {() => this.increment()} 
+         onDecrement = {() => this.decrement()} />
      </div>
 );
   }
